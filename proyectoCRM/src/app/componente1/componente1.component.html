@@ -1,0 +1,66 @@
+<h2>Gestión de Clientes</h2>
+
+<div class="container">
+    <!-- Sección del Formulario con Componentes de Material -->
+    <div class="form-section">
+        <h3>Añadir Nuevo Cliente</h3>
+        <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="name">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Teléfono</mat-label>
+                <input matInput formControlName="phone">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="customerForm.invalid">Añadir
+                Cliente</button>
+        </form>
+    </div>
+
+    <!-- Sección de la Tabla con Componentes de Material -->
+    <div class="list-section">
+        <h3>Listado de Clientes</h3>
+        <div class="table-container">
+            @if (isLoading()) {
+            <mat-spinner></mat-spinner>
+            } @else {
+            <table mat-table [dataSource]="customers()" class="mat-elevation-z8">
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                    <td mat-cell *matCellDef="let customer"> {{customer.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> Email </th>
+                    <td mat-cell *matCellDef="let customer"> {{customer.email}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="phone">
+                    <th mat-header-cell *matHeaderCellDef> Teléfono </th>
+                    <td mat-cell *matCellDef="let customer"> {{customer.phone}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                    <td mat-cell *matCellDef="let customer">
+                        <button mat-icon-button color="warn" (click)="deleteCustomer(customer.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            }
+        </div>
+    </div>
+</div>

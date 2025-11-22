@@ -1,0 +1,29 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+}
+
+.form-section,
+.list-section {
+    padding: 1.5rem;
+}
+
+form div {
+    margin-bottom: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+table {
+    width: 100%;
+}
+
+.table-container {
+    position: relative;
+    min-height: 200px;
+}
