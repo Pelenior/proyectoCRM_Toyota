@@ -1,0 +1,50 @@
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
+# Removed leading '/' to apply recursively to all Angular projects
+dist/
+tmp/
+out-tsc/
+bazel-out/
+coverage/
+*.tsbuildinfo
+
+# Node
+# Removed leading '/' to apply recursively
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+connect.lock
+libpeerconnection.log
+testem.log
+typings/
+
+# IDEs and editors
+# These patterns were already recursive and are correct
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+# These patterns will apply to any .vscode folder in any subdirectory
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+
+# Miscellaneous
+# Removed leading '/'
+.angular/
+.sass-cache/
+
+# System files
+# These apply recursively
+.DS_Store
+Thumbs.db
