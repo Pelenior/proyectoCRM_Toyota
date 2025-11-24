@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Componente1Component } from './componente1/componente1.component';
+import { FormComponent } from './form/form.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Componente1Component],
+  imports: [FormComponent, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

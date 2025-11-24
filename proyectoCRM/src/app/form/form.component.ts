@@ -4,16 +4,16 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ServicioAPIService, Customer } from '../servicio-api.service';
 
 @Component({
-  selector: 'app-componente1',
+  selector: 'app-form',
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule
   ],
-  templateUrl: './componente1.component.html',
-  styleUrl: './componente1.component.css'
+  templateUrl: './form.component.html',
+  styleUrl: './form.component.css'
 })
-export class Componente1Component {
+export class FormComponent {
   // Signal para gestionar el estado de los clientes
   private customers$: WritableSignal<Customer[]> = signal([]);
 
