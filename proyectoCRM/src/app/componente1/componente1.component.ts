@@ -3,28 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ServicioAPIService, Customer } from '../servicio-api.service';
 
-// Imports de Angular Material
-import { MatTableModule } from '@angular/material/table';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
 @Component({
   selector: 'app-componente1',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSnackBarModule,
-    MatProgressSpinnerModule
+    ReactiveFormsModule
   ],
   templateUrl: './componente1.component.html',
   styleUrl: './componente1.component.css'
@@ -45,7 +29,6 @@ export class Componente1Component {
   constructor(
     private apiService: ServicioAPIService,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
   ) {
     this.customerForm = this.fb.group({
       name: ['', Validators.required],
@@ -72,7 +55,7 @@ export class Componente1Component {
           // Actualizamos el signal añadiendo el nuevo cliente
           this.customers$.update(currentCustomers => [...currentCustomers, newCustomer]);
           this.customerForm.reset();
-          this.snackBar.open('Cliente añadido con éxito', 'Cerrar', { duration: 3000 });
+          // this.snackBar.open('Cliente añadido con éxito', 'Cerrar', { duration: 3000 });
         });
     }
   }
@@ -81,7 +64,7 @@ export class Componente1Component {
     this.apiService.deleteCustomer(id).subscribe(() => {
       // Actualizamos el signal filtrando el cliente borrado
       this.customers$.update(customers => customers.filter(c => c.id !== id));
-      this.snackBar.open('Cliente eliminado', 'Cerrar', { duration: 3000 });
+      // this.snackBar.open('Cliente eliminado', 'Cerrar', { duration: 3000 });
     });
   }
 }

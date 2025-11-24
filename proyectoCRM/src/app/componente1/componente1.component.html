@@ -1,66 +1,69 @@
-<h2>Gestión de Clientes</h2>
+<h2 class="text-2xl font-bold text-gray-800 mb-6">Gestión de Clientes</h2>
 
-<div class="container">
-    <!-- Sección del Formulario con Componentes de Material -->
-    <div class="form-section">
-        <h3>Añadir Nuevo Cliente</h3>
-        <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
-            <mat-form-field appearance="outline">
-                <mat-label>Nombre</mat-label>
-                <input matInput formControlName="name">
-            </mat-form-field>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-4">Añadir Nuevo Cliente</h3>
+        <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
+                <input id="name" type="text" formControlName="name"
+                    class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input matInput type="email" formControlName="email">
-            </mat-form-field>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input id="email" type="email" formControlName="email"
+                    class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Teléfono</mat-label>
-                <input matInput formControlName="phone">
-            </mat-form-field>
+            <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                <input id="phone" type="text" formControlName="phone"
+                    class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
 
-            <button mat-raised-button color="primary" type="submit" [disabled]="customerForm.invalid">Añadir
-                Cliente</button>
+            <button type="submit" [disabled]="customerForm.invalid"
+                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-300 disabled:cursor-not-allowed">
+                Añadir Cliente
+            </button>
         </form>
     </div>
 
-    <!-- Sección de la Tabla con Componentes de Material -->
-    <div class="list-section">
-        <h3>Listado de Clientes</h3>
-        <div class="table-container">
+    <!-- Sección de la Tabla con Tailwind CSS -->
+    <div class="md:col-span-2 bg-white p-6 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold mb-4">Listado de Clientes</h3>
+        <div class="relative overflow-x-auto">
             @if (isLoading()) {
-            <mat-spinner></mat-spinner>
+            <div class="flex justify-center items-center h-40">
+                <p>Cargando clientes...</p>
+            </div>
             } @else {
-            <table mat-table [dataSource]="customers()" class="mat-elevation-z8">
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef> Nombre </th>
-                    <td mat-cell *matCellDef="let customer"> {{customer.name}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="email">
-                    <th mat-header-cell *matHeaderCellDef> Email </th>
-                    <td mat-cell *matCellDef="let customer"> {{customer.email}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="phone">
-                    <th mat-header-cell *matHeaderCellDef> Teléfono </th>
-                    <td mat-cell *matCellDef="let customer"> {{customer.phone}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef> Acciones </th>
-                    <td mat-cell *matCellDef="let customer">
-                        <button mat-icon-button color="warn" (click)="deleteCustomer(customer.id)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <table class="w-full text-sm text-left text-gray-500">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">Nombre</th>
+                        <th scope="col" class="px-6 py-3">Email</th>
+                        <th scope="col" class="px-6 py-3">Teléfono</th>
+                        <th scope="col" class="px-6 py-3">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (customer of customers(); track customer.id) {
+                    <tr class="bg-white border-b hover:bg-gray-50">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ customer.name }}</td>
+                        <td class="px-6 py-4">{{ customer.email }}</td>
+                        <td class="px-6 py-4">{{ customer.phone }}</td>
+                        <td class="px-6 py-4">
+                            <button (click)="deleteCustomer(customer.id)" class="font-medium text-red-600 hover:underline">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
             </table>
             }
         </div>
     </div>
 </div>
+
