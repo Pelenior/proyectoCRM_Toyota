@@ -33,7 +33,7 @@ export class ServicioAPIService {
   // GET: Obtener todos los clientes
   getCustomers(): Observable<Customer[]> {
     // Luego cambiamos'of(this.customersPrueba)' con 'this.http.get<Customer[]>(this.apiUrl)' para que funcione con la API
-    return of(this.customersPrueba).pipe(delay(500)); // Simula un retardo de red
+    return of([...this.customersPrueba]).pipe(delay(500)); // Simula un retardo de red
   }
 
   // Añade Clientes

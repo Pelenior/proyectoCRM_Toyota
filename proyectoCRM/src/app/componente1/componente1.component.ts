@@ -71,9 +71,9 @@ export class Componente1Component {
         .subscribe(newCustomer => {
           // Actualizamos el signal añadiendo el nuevo cliente
           this.customers$.update(currentCustomers => [...currentCustomers, newCustomer]);
+          this.customerForm.reset();
           this.snackBar.open('Cliente añadido con éxito', 'Cerrar', { duration: 3000 });
         });
-      this.customerForm.reset();
     }
   }
 
