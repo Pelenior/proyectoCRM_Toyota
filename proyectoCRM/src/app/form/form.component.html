@@ -5,8 +5,8 @@
         <h3 class="text-xl font-semibold mb-4">Añadir Nuevo Cliente</h3>
         <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()" class="space-y-4">
             <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
-                <input id="name" type="text" formControlName="name"
+                <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+                <input id="nombre" type="text" formControlName="nombre"
                     class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
 
@@ -17,8 +17,8 @@
             </div>
 
             <div>
-                <label for="phone" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                <input id="phone" type="text" formControlName="phone"
+                <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                <input id="telefono" type="text" formControlName="telefono"
                     class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
 
