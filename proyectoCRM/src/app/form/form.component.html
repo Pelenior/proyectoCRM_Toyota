@@ -3,7 +3,7 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
     <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-md">
         <h3 class="text-xl font-semibold mb-4">Añadir Nuevo Cliente</h3>
-        <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()" class="space-y-4">
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
                 <input id="name" type="text" formControlName="name"
@@ -22,7 +22,7 @@
                     class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             </div>
 
-            <button type="submit" [disabled]="customerForm.invalid"
+            <button type="submit" [disabled]="clienteForm.invalid"
                 class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-300 disabled:cursor-not-allowed">
                 Añadir Cliente
             </button>
@@ -48,13 +48,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for (customer of customers(); track customer.id) {
+                    @for (cliente of clientes(); track cliente.id) {
                     <tr class="bg-white border-b hover:bg-gray-50">
-                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ customer.name }}</td>
-                        <td class="px-6 py-4">{{ customer.email }}</td>
-                        <td class="px-6 py-4">{{ customer.phone }}</td>
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ cliente.nombre }}</td>
+                        <td class="px-6 py-4">{{ cliente.email }}</td>
+                        <td class="px-6 py-4">{{ cliente.telefono }}</td>
                         <td class="px-6 py-4">
-                            <button (click)="deleteCustomer(customer.id)" class="font-medium text-red-600 hover:underline">
+                            <button (click)="deleteCliente(cliente.id)"
+                                class="font-medium text-red-600 hover:underline">
                                 Eliminar
                             </button>
                         </td>
@@ -66,4 +67,3 @@
         </div>
     </div>
 </div>
-

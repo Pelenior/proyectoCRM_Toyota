@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 // Interfaz de datos para la API
 export interface Clientes {
   id: number;
-  name: string;
+  nombre: string;
   email: string;
   telefono: number;
 }
