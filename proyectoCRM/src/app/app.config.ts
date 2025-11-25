@@ -1,7 +1,7 @@
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
-  // El de http es para que se pueda usar en todo el proyecto
-  providers: [provideHttpClient()]
+  providers: [importProvidersFrom(HttpClientModule)]
 };
