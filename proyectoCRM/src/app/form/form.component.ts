@@ -50,12 +50,24 @@ export class FormComponent {
 
   onSubmit(): void {
     if (this.clienteForm.valid) {
-      this.apiService.addClientes(this.clienteForm.value)
+      const clienteData = this.clienteForm.value;
+
+      // Elimina cualquier carácter que no sea un dígito
+      const telefonoLimpio = clienteData.telefono.toString().replace(/\D/g, '');
+
+      //Crea el payload para el POST:
+      const payload = {
+        nombre: clienteData.nombre,
+        email: clienteData.email,
+        // Pasa la cadena a número
+        telefono: parseInt(telefonoLimpio, 10)
+      };
+
+      this.apiService.addClientes(payload as Omit<Clientes, 'id'>)
         .subscribe(newCliente => {
           // Actualizamos el signal añadiendo el nuevo cliente
           this.clientes$.update(currentCustomers => [...currentCustomers, newCliente]);
           this.clienteForm.reset();
-          // this.snackBar.open('Cliente añadido con éxito', 'Cerrar', { duration: 3000 });
         });
     }
   }

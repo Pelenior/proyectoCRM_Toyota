@@ -16,7 +16,7 @@ public class Cliente {
 
  private String nombre;
  private String email;
- private Integer telefono; // Usamos Integer ya que en el SQL es INT(9)
+ private Integer telefono; 
 
 
  public Cliente() {
