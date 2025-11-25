@@ -1,7 +1,7 @@
 import { Component, WritableSignal, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ServicioAPIService, Customer } from '../servicio-api.service';
+import { ServicioAPIService, Clientes } from '../servicio-api.service';
 
 @Component({
   selector: 'app-form',
@@ -15,7 +15,7 @@ import { ServicioAPIService, Customer } from '../servicio-api.service';
 })
 export class FormComponent {
   // Signal para gestionar el estado de los clientes
-  private customers$: WritableSignal<Customer[]> = signal([]);
+  private customers$: WritableSignal<Clientes[]> = signal([]);
 
   // Signal para controlar el estado de carga inicial
   public isLoading = signal(true);
@@ -42,7 +42,7 @@ export class FormComponent {
 
   // Carga clientes y finaliza el proceso al terminar
   loadCustomers(): void {
-    this.apiService.getCustomers().subscribe(data => {
+    this.apiService.getClientes().subscribe(data => {
       this.customers$.set(data);
       this.isLoading.set(false);
     });
@@ -50,7 +50,7 @@ export class FormComponent {
 
   onSubmit(): void {
     if (this.customerForm.valid) {
-      this.apiService.addCustomer(this.customerForm.value)
+      this.apiService.addClientes(this.customerForm.value)
         .subscribe(newCustomer => {
           // Actualizamos el signal añadiendo el nuevo cliente
           this.customers$.update(currentCustomers => [...currentCustomers, newCustomer]);
@@ -61,7 +61,7 @@ export class FormComponent {
   }
 
   deleteCustomer(id: number): void {
-    this.apiService.deleteCustomer(id).subscribe(() => {
+    this.apiService.deleteClientes(id).subscribe(() => {
       // Actualizamos el signal filtrando el cliente borrado
       this.customers$.update(customers => customers.filter(c => c.id !== id));
       // this.snackBar.open('Cliente eliminado', 'Cerrar', { duration: 3000 });
