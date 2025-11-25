@@ -1,1 +1,60 @@
+<header class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-4">
+      <!-- Top bar -->
+      <div class="flex justify-between items-center border-b py-2 text-sm text-gray-600">
+        <div>
+          <p><strong class="text-red-600">Toyota Exclusiva Drive</strong> - Alquila un Toyota chofer usándonos - Tel: 34 678 42 95 13</p>
+        </div>
+        <div>
+          <ul class="flex space-x-6">
+            <li><a href="#" class="hover:text-red-600">Nosotros</a></li>
+            <li><a href="#" class="hover:text-red-600">Precios</a></li>
+            <li><a href="#" class="hover:text-red-600">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Header content -->
+      <div class="flex justify-between items-center py-4">
+        <!-- Logo -->
+        <div>
+          <a routerLink="/"><img src="img/logoToyota.png" alt="logoToyota" class="w-12 h-16"></a>
+        </div>
+
+        <!-- Icons + CTA -->
+        <div class="flex items-center space-x-8">
+          <button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">Reserva ahora</button>
+          <div class="flex space-x-6 text-sm">
+            <div>
+              <p class="flex items-center gap-2 font-semibold text-gray-700">
+                <i class="fa fa-check-square-o text-red-600"></i> Chofer profesional
+              </p>
+              <p class="text-gray-500">Con experiencia</p>
+            </div>
+            <div>
+              <p class="flex items-center gap-2 font-semibold text-gray-700">
+                <i class="fa fa-check-square-o text-red-600"></i> Traslados privados
+              </p>
+              <p class="text-gray-500">Discresión y lujo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="flex justify-between items-center border-t pt-3">
+        <ul class="flex space-x-6 font-medium text-gray-700">
+          <li class="hover:text-red-600">Chófer de lujo</li>
+          <li class="hover:text-red-600">Servicios</li>
+          <li class="hover:text-red-600">Flota</li>
+          <li class="hover:text-red-600">Precios</li>
+          <li class="hover:text-red-600">Contacto</li>
+        </ul>
+        <div class="space-x-4">
+          <button routerLink="/" class="px-4 py-2 border rounded hover:bg-gray-100">Iniciar sesión</button>
+          <button routerLink="/form" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Crear una cuenta</button>
+        </div>
+      </nav>
+    </div>
+  </header>
 <router-outlet></router-outlet>
