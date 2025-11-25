@@ -1,69 +1,71 @@
-<h2 class="text-2xl font-bold text-gray-800 mb-6">Gestión de Clientes</h2>
-
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-md">
-        <h3 class="text-xl font-semibold mb-4">Añadir Nuevo Cliente</h3>
-        <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()" class="space-y-4">
-            <div>
-                <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-                <input id="nombre" type="text" formControlName="nombre"
-                    class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+<div class="max-w-7xl mx-auto px-4 py-10">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Gestión de Clientes</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-4">Añadir Nuevo Cliente</h3>
+            <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()" class="space-y-4">
+                <div>
+                    <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+                    <input id="nombre" type="text" formControlName="nombre"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+    
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input id="email" type="email" formControlName="email"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+    
+                <div>
+                    <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                    <input id="telefono" type="text" formControlName="telefono"
+                        class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+    
+                <button type="submit" [disabled]="clienteForm.invalid"
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-300 disabled:cursor-not-allowed">
+                    Añadir Cliente
+                </button>
+            </form>
+        </div>
+    
+        <!-- Sección de la Tabla con Tailwind CSS -->
+        <div class="md:col-span-2 bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-xl font-semibold mb-4">Listado de Clientes</h3>
+            <div class="relative overflow-x-auto">
+                @if (isLoading()) {
+                <div class="flex justify-center items-center h-40">
+                    <p>Cargando clientes...</p>
+                </div>
+                } @else {
+                <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">Nombre</th>
+                            <th scope="col" class="px-6 py-3">Email</th>
+                            <th scope="col" class="px-6 py-3">Teléfono</th>
+                            <th scope="col" class="px-6 py-3">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (cliente of clientes(); track cliente.id) {
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ cliente.nombre }}</td>
+                            <td class="px-6 py-4">{{ cliente.email }}</td>
+                            <td class="px-6 py-4">{{ cliente.telefono }}</td>
+                            <td class="px-6 py-4">
+                                <button (click)="deleteCliente(cliente.id)"
+                                    class="font-medium text-red-600 hover:underline">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+                }
             </div>
-
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                <input id="email" type="email" formControlName="email"
-                    class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            </div>
-
-            <div>
-                <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                <input id="telefono" type="text" formControlName="telefono"
-                    class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            </div>
-
-            <button type="submit" [disabled]="clienteForm.invalid"
-                class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-300 disabled:cursor-not-allowed">
-                Añadir Cliente
-            </button>
-        </form>
-    </div>
-
-    <!-- Sección de la Tabla con Tailwind CSS -->
-    <div class="md:col-span-2 bg-white p-6 rounded-lg shadow-md">
-        <h3 class="text-xl font-semibold mb-4">Listado de Clientes</h3>
-        <div class="relative overflow-x-auto">
-            @if (isLoading()) {
-            <div class="flex justify-center items-center h-40">
-                <p>Cargando clientes...</p>
-            </div>
-            } @else {
-            <table class="w-full text-sm text-left text-gray-500">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">Nombre</th>
-                        <th scope="col" class="px-6 py-3">Email</th>
-                        <th scope="col" class="px-6 py-3">Teléfono</th>
-                        <th scope="col" class="px-6 py-3">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (cliente of clientes(); track cliente.id) {
-                    <tr class="bg-white border-b hover:bg-gray-50">
-                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{{ cliente.nombre }}</td>
-                        <td class="px-6 py-4">{{ cliente.email }}</td>
-                        <td class="px-6 py-4">{{ cliente.telefono }}</td>
-                        <td class="px-6 py-4">
-                            <button (click)="deleteCliente(cliente.id)"
-                                class="font-medium text-red-600 hover:underline">
-                                Eliminar
-                            </button>
-                        </td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-            }
         </div>
     </div>
 </div>
