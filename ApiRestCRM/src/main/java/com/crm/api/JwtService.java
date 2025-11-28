@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    private final String SECRET_KEY = "tu_clave_secreta_de_super_puta_madre_debe_ser_larga_en_base64_para_que_funcione_bien_con_256_bits";
+    private final String SECRET_KEY = "c3VwZXJfc2VjcmV0X2tleV9mb3JfdGhpc19hcHBfMTIzNDU2Nzg5MA==";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
