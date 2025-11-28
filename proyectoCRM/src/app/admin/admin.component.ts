@@ -1,6 +1,7 @@
 import { Component, WritableSignal, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { ServicioAPIService, Clientes, Chofer } from '../servicio-api.service';
 
 @Component({
@@ -8,8 +9,9 @@ import { ServicioAPIService, Clientes, Chofer } from '../servicio-api.service';
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    RouterLink
+],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
