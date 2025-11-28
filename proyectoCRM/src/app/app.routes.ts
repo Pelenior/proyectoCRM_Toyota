@@ -15,6 +15,7 @@ import { roleGuard } from './guards/role.guard';
 import { TarifasComponent } from './tarifas/tarifas.component';
 import { SignupComponent } from './signup/signup.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},
@@ -38,6 +39,7 @@ export const routes: Routes = [
         canActivate: [roleGuard],
         data: { expectedRole: ['CLIENTE', 'ADMIN']}
     },
+    { path: 'forgot-password', component: ForgotPasswordComponent},
     { path: 'servicios', component: ServiciosComponent},
     { path: 'nosotros', component: NosotrosComponent},
     { path: 'flota', component: FlotaComponent},
