@@ -14,6 +14,7 @@ import { ChoferComponent } from './chofer/chofer.component';
 import { roleGuard } from './guards/role.guard';
 import { TarifasComponent } from './tarifas/tarifas.component';
 import { SignupComponent } from './signup/signup.component';
+import { ClienteComponent } from './cliente/cliente.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},
@@ -30,6 +31,12 @@ export const routes: Routes = [
         component:ChoferComponent,
         canActivate: [roleGuard],
         data: { expectedRole: ['ADMIN', 'CHOFER']}
+    },
+    {
+        path: 'cliente',
+        component:ClienteComponent,
+        canActivate: [roleGuard],
+        data: { expectedRole: ['CLIENTE', 'ADMIN']}
     },
     { path: 'servicios', component: ServiciosComponent},
     { path: 'nosotros', component: NosotrosComponent},

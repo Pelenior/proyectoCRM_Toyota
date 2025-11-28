@@ -66,4 +66,13 @@ export class ServicioAPIService {
   deleteChofer(id: number): Observable<any> {
     return this.http.delete(`${this.apiChoferesUrl}/${id}`);
   }
+
+  assignChoferAutomatico(): Observable<Clientes> {
+    // We send an empty body {} because the backend uses the Token to identify the user
+    return this.http.post<Clientes>(`${this.apiClientesUrl}/contratar`, {});
+  }
+
+  cancelarChofer(): Observable<Clientes> {
+    return this.http.post<Clientes>(`${this.apiClientesUrl}/despedir`, {});
+  }
 }

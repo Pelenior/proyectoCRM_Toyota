@@ -73,4 +73,73 @@ public class Controlador {
          
          return clienteRepositorio.save(cliente);
     }
+    
+    // POST: Assign the least busy chofer to the current client
+    @PostMapping("/contratar")
+    public Cliente contratarChofer(Authentication authentication) {
+        String email = authentication.getName();
+        
+        // 1. Get the current logged-in client
+        Cliente currentClient = clienteRepositorio.findAll().stream()
+                .filter(c -> c.getEmail().equals(email))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+        // 1.5 NEW: STOP if they already have a driver
+        if (currentClient.getIdChofer() != null) {
+            // Already has a driver? Return immediately without changing anything
+            return currentClient; 
+            // OR: throw new RuntimeException("Ya tienes un chofer asignado");
+        }
+
+        // 2. Get all drivers
+        List<Chofer> allChoferes = choferRepo.findAll();
+        if (allChoferes.isEmpty()) {
+            throw new RuntimeException("No hay choferes disponibles");
+        }
+
+        // 3. Get all clients (to count assignments)
+        List<Cliente> allClientes = clienteRepositorio.findAll();
+
+        // 4. Algorithm: Find the chofer with the MINIMUM count of clients
+        Chofer bestChofer = null;
+        int minClients = Integer.MAX_VALUE;
+
+        for (Chofer chofer : allChoferes) {
+            long count = allClientes.stream()
+                    .filter(c -> chofer.getId().equals(c.getIdChofer()))
+                    .count();
+            
+            if (count < minClients) {
+                minClients = (int) count;
+                bestChofer = chofer;
+            }
+        }
+
+        // 5. Assign and Save
+        if (bestChofer != null) {
+            currentClient.setIdChofer(bestChofer.getId());
+            return clienteRepositorio.save(currentClient);
+        }
+        
+        return currentClient;
+    }
+    
+    @PostMapping("/despedir")
+    public Cliente despedirChofer(Authentication authentication) {
+        String email = authentication.getName();
+        
+        // 1. Get current client
+        Cliente currentClient = clienteRepositorio.findAll().stream()
+                .filter(c -> c.getEmail().equals(email))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
+
+        // 2. Set Chofer to NULL
+        currentClient.setIdChofer(null);
+        
+        // 3. Save and Return
+        return clienteRepositorio.save(currentClient);
+    }
+        
 }

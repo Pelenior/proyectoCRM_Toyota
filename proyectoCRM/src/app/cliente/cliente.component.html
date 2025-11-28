@@ -1,0 +1,97 @@
+<div class="max-w-4xl mx-auto px-4 py-12">
+    
+    @if (isLoading()) {
+        <div class="flex justify-center py-20">
+            <p class="text-gray-500 text-lg animate-pulse">Cargando tu perfil...</p>
+        </div>
+    } @else {
+        
+        <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+            <!-- Header -->
+            <div class="bg-red-600 px-6 py-4">
+                <h1 class="text-white text-2xl font-bold">Bienvenido, {{ me()?.nombre }}</h1>
+                <p class="text-red-100 text-sm">Panel de Cliente Exclusivo</p>
+            </div>
+
+            <div class="p-8">
+                
+                <!-- STATUS SECTION -->
+                <div class="mb-8 text-center">
+                    <h2 class="text-gray-500 uppercase tracking-wide text-sm font-semibold mb-2">Estado del Servicio</h2>
+                    
+                    @if (me()?.id_chofer) {
+                        <!-- HAS CHOFER -->
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-800 rounded-full font-bold text-lg">
+                            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
+                            Servicio Activo
+                        </div>
+                    } @else {
+                        <!-- NO CHOFER -->
+                        <div class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-600 rounded-full font-bold text-lg">
+                            <span class="w-3 h-3 bg-gray-400 rounded-full"></span>
+                            Sin Asignar
+                        </div>
+                    }
+                </div>
+
+                <hr class="border-gray-200 mb-8">
+
+                <!-- CHOFER DETAILS OR CTA -->
+                @if (me()?.id_chofer) {
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Tu Chofer Personal</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm text-gray-500">Nombre</p>
+                                <p class="text-lg font-medium text-gray-900">{{ myChofer()?.nombre || 'Cargando...' }}</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Contacto</p>
+                                <a [href]="'mailto:' + myChofer()?.email" class="text-lg font-medium text-gray-900 hover:text-red-600 hover:underline">
+                                    {{ myChofer()?.email }}
+                                </a>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Teléfono</p>
+                                <p class="text-lg font-medium text-gray-900">{{ myChofer()?.telefono }}</p>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <a [href]="'tel:' + myChofer()?.telefono" class="text-red-600 font-semibold hover:underline flex items-center gap-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                                    </svg>
+                                    Llamar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 text-center">
+                        <button (click)="cancelarService()" 
+                            class="px-6 py-2 border border-red-200 text-red-600 font-medium rounded-full hover:bg-red-50 hover:border-red-300 transition-colors text-sm">
+                            Cancelar / Finalizar Servicio
+                        </button>
+                        <p class="text-xs text-gray-400 mt-2">Esto liberará al chofer asignado.</p>
+                    </div>
+
+                } @else {
+                    <!-- CTA: HIRE DRIVER -->
+                    <div class="text-center py-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">¿Necesitas transporte?</h3>
+                        <p class="text-gray-600 mb-8 max-w-md mx-auto">
+                            Contrata ahora nuestro servicio exclusivo. Asignaremos automáticamente al mejor chofer disponible para ti.
+                        </p>
+
+                        <button (click)="contratarService()" 
+                            class="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-lg">
+                            Contratar Chofer Ahora
+                        </button>
+                        <p class="text-xs text-gray-400 mt-4">* Sin coste adicional durante el periodo de prueba.</p>
+                    </div>
+                }
+
+            </div>
+        </div>
+    }
+</div>
