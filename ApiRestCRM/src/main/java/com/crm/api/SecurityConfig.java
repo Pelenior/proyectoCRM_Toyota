@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.http.HttpMethod;
 
 import java.util.List;
 
@@ -27,28 +28,27 @@ import java.util.List;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    // NOTA: Eliminamos el constructor de la clase SecurityConfig para evitar
-    // dependencias circulares. Inyectaremos las dependencias directamente en los @Bean.
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http, 
+	                                               JwtAuthenticationFilter jwtAuthFilter, 
+	                                               AuthenticationProvider authProvider) throws Exception {
+	    http
+	        .csrf(csrf -> csrf.disable())
+	        .cors(Customizer.withDefaults())
+	        .authorizeHttpRequests(auth -> auth
+	            // FIX: Allow the "Handshake" (OPTIONS) requests globally
+	            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+	            
+	            .requestMatchers("/api/auth/**").permitAll()
+	            .anyRequest().authenticated()
+	        )
+	        .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+	        .authenticationProvider(authProvider)
+	        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, 
-                                                   JwtAuthenticationFilter jwtAuthFilter, 
-                                                   AuthenticationProvider authProvider) throws Exception {
-        http
-            .csrf(csrf -> csrf.disable())
-            .cors(Customizer.withDefaults())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .anyRequest().authenticated()
-            )
-            .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationProvider(authProvider)
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
-    }
+	    return http.build();
+	}
     
-    // --- CORRECCIÓN PRINCIPAL AQUÍ ---
     @Bean
     public AuthenticationProvider authenticationProvider(
             UserDetailsService userDetailsService,
@@ -83,9 +83,19 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        
+        // 1. Allow your frontend origin
         configuration.setAllowedOrigins(List.of("http://localhost:4200"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        
+        // 2. Allow ALL methods (GET, POST, PUT, DELETE, OPTIONS, etc.)
+        configuration.setAllowedMethods(List.of("*"));
+        
+        // 3. Allow ALL headers (This fixes the 403 on POST)
+        configuration.setAllowedHeaders(List.of("*"));
+        
+        // 4. Allow credentials (optional, but good for stability)
+        configuration.setAllowCredentials(true);
+        
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

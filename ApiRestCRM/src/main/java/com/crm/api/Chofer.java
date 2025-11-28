@@ -2,6 +2,7 @@ package com.crm.api;
 
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "choferes")
@@ -14,7 +15,7 @@ public class Chofer {
     private String email;
     private Integer telefono;
     
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String rol; 
 

@@ -1,7 +1,7 @@
 import { Component, WritableSignal, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ServicioAPIService, Clientes } from '../servicio-api.service';
+import { ServicioAPIService, Clientes, Chofer } from '../servicio-api.service';
 
 @Component({
   selector: 'app-admin',
@@ -16,14 +16,16 @@ import { ServicioAPIService, Clientes } from '../servicio-api.service';
 export class AdminComponent {
   // Signal para gestionar el estado de los clientes
   private clientes$: WritableSignal<Clientes[]> = signal([]);
+  public clientes = this.clientes$.asReadonly();
+
+  public listaChoferes = signal<Chofer[]>([]);
 
   // Signal para controlar el estado de carga inicial
   public isLoading = signal(true);
 
-  // Signal de solo lectura para usarlo en la plantilla
-  public clientes = this.clientes$.asReadonly();
-
   clienteForm: FormGroup
+  choferForm: FormGroup;
+
   displayedColumns: string[] = ['name', 'email', 'phone', 'actions'];
 
   constructor(
@@ -34,10 +36,20 @@ export class AdminComponent {
       nombre: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       telefono: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      id_chofer: [null]
+    });
+
+    this.choferForm = this.fb.group({
+      nombre: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telefono: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(4)]]
     });
 
     // Carga inicial de datos
     this.loadClientes();
+    this.loadChoferes();
   }
 
   // Carga clientes y finaliza el proceso al terminar
@@ -48,7 +60,13 @@ export class AdminComponent {
     });
   }
 
-  onSubmit(): void {
+  loadChoferes(): void {
+    this.apiService.getChoferes().subscribe(data => {
+      this.listaChoferes.set(data);
+    });
+  }
+
+  onSubmitClient(): void {
     if (this.clienteForm.valid) {
       const clienteData = this.clienteForm.value;
 
@@ -56,27 +74,71 @@ export class AdminComponent {
       const telefonoLimpio = clienteData.telefono.toString().replace(/\D/g, '');
 
       //Crea el payload para el POST:
-      const payload = {
+      const payload: Omit<Clientes, 'id'> = {
         nombre: clienteData.nombre,
         email: clienteData.email,
-        // Pasa la cadena a número
-        telefono: parseInt(telefonoLimpio, 10)
+        telefono: parseInt(telefonoLimpio, 10),
+        // Send the plain password (Backend will encrypt it)
+        password: clienteData.password, 
+        rol: 'CLIENTE', 
+        id_chofer: clienteData.id_chofer ? parseInt(clienteData.id_chofer) : undefined
       };
 
-      this.apiService.addClientes(payload as Omit<Clientes, 'id'>)
+      this.apiService.addClientes(payload)
         .subscribe(newCliente => {
-          // Actualizamos el signal añadiendo el nuevo cliente
           this.clientes$.update(currentCustomers => [...currentCustomers, newCliente]);
           this.clienteForm.reset();
+          this.clienteForm.patchValue({ id_chofer: null });
         });
     }
   }
 
   deleteCliente(id: number): void {
-    this.apiService.deleteClientes(id).subscribe(() => {
-      // Actualizamos el signal filtrando el cliente borrado
-      this.clientes$.update(clientes => clientes.filter(c => c.id !== id));
-      // this.snackBar.open('Cliente eliminado', 'Cerrar', { duration: 3000 });
-    });
+    if(confirm('¿Seguro que quieres eliminar este chofer?')) {
+      this.apiService.deleteClientes(id).subscribe(() => {
+        // Actualizamos el signal filtrando el cliente borrado
+        this.clientes$.update(clientes => clientes.filter(c => c.id !== id));
+        // this.snackBar.open('Cliente eliminado', 'Cerrar', { duration: 3000 });
+      });
+    }
+  }
+
+
+  onSubmitChofer(): void {
+    if (this.choferForm.valid) {
+      const formVal = this.choferForm.value;
+      const telefonoLimpio = formVal.telefono.toString().replace(/\D/g, '');
+
+      const payload: Omit<Chofer, 'id'> = {
+        nombre: formVal.nombre,
+        email: formVal.email,
+        telefono: parseInt(telefonoLimpio, 10),
+        password: formVal.password,
+        // Force the role here (though Backend does it too)
+        rol: 'CHOFER' 
+      };
+
+      this.apiService.addChofer(payload).subscribe(newChofer => {
+        // Update the signal so the table AND the dropdown update instantly
+        this.listaChoferes.update(curr => [...curr, newChofer]);
+        this.choferForm.reset();
+      });
+    }
+  }
+
+  deleteChofer(id: number): void {
+    if(confirm('¿Seguro que quieres eliminar este chofer?')) {
+      this.apiService.deleteChofer(id).subscribe(() => {
+        this.listaChoferes.update(c => c.filter(x => x.id !== id));
+      });
+    }
+  }
+
+  getNombreChofer(id?: number): string {
+    if (!id) return 'Ninguno';
+    
+    const found = this.listaChoferes().find(c => c.id === id);
+    
+    return found ? found.nombre : 'Desconocido';
   }
 }

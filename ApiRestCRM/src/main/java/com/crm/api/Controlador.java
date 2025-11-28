@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/clientes")
 // CORS debe configurarse globalmente en SecurityConfig, pero mantenemos esto por si acaso
-@CrossOrigin(origins = "http://localhost:4200") 
+//@CrossOrigin(origins = "http://localhost:4200") 
 public class Controlador {
 
     @Autowired 
@@ -53,9 +53,9 @@ public class Controlador {
         }
     }
 
-    // DELETE: Admin borra cualquiera. 
+ // DELETE: Admin borra cualquiera. 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')") // Solo Admin puede borrar libremente
+    @PreAuthorize("hasAuthority('ADMIN')") 
     public void deleteCliente(@PathVariable Integer id) {
         clienteRepositorio.deleteById(id);
     }

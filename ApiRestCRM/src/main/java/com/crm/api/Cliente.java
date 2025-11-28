@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity // Representa la tabla en la base de datos
 @Table(name = "clientes") // Nombre específico de la tabla
@@ -21,9 +22,11 @@ public class Cliente {
  private Integer telefono; 
  
  @Column(name = "id_chofer")
+ // FIX: Map the JSON "id_chofer" to this Java variable
+ @JsonProperty("id_chofer") 
  private Integer idChofer;
 
- @JsonIgnore
+ @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
  private String password;
  private String rol;
  
