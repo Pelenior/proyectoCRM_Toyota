@@ -1,10 +1,32 @@
 <body class="font-sans bg-gray-50 text-gray-800">
-  <!-- Main -->
   <article class="max-w-7xl mx-auto px-4 py-10">
     <main>
       <h1 class="text-3xl font-bold text-gray-900 mb-6">Alquiler de Toyota con chófer</h1>
+      <section class="bg-gray-800 text-white shadow-lg rounded-lg p-8 mb-10 text-center transform transition hover:scale-[1.01]">
+        
+        @if (hasDriver()) {
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Tu servicio está activo</h2>
+            <p class="text-gray-300 mb-8 max-w-2xl mx-auto text-lg">
+                Ya tienes un conductor asignado. Accede a tu panel para ver los datos de contacto o gestionar tu viaje.
+            </p>
+            
+            <button (click)="startHiring()" 
+                class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-md text-lg transition duration-300 ease-in-out border-2 border-green-600 hover:border-green-500">
+                Comprueba tu Chofer &rarr;
+            </button>
 
-      <!-- Info section -->
+        } @else {
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">¿Necesitas un chofer ahora mismo?</h2>
+            <p class="text-gray-300 mb-8 max-w-2xl mx-auto text-lg">
+                No pierdas tiempo buscando. Únete a nuestra plataforma y asignaremos automáticamente al mejor conductor disponible para ti en segundos.
+            </p>
+            
+            <button (click)="startHiring()" 
+                class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full shadow-md text-lg transition duration-300 ease-in-out">
+                ¡Empezar a Contratar!
+            </button>
+        }
+      </section>
       <section class="bg-white shadow rounded p-6 mb-10">
         <a routerLink="/tarifas" class="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Tarifas 2025</a>
         <h3 class="text-xl font-semibold text-red-600 mb-2">Traslados de alta gama.</h3>
@@ -16,8 +38,6 @@
         </p>
         <a routerLink="/contacto" class="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Solicita presupuesto</a>
       </section>
-
-      <!-- News section -->
       <section class="bg-white shadow rounded p-6">
         <h3 class="text-xl font-semibold text-red-600 mb-4">Novedades servicio de alquiler de Toyota Exclusive Drive 2025</h3>
         <img src="img/cochesToyota.png" alt="cochesToyota" class="w-full rounded mb-6">
@@ -29,7 +49,6 @@
     </main>
   </article>
 
-  <!-- Footer -->
   <footer class="bg-gray-900 text-gray-300 py-8 mt-10">
     <div class="max-w-7xl mx-auto px-4">
       <h5 class="text-lg font-semibold text-white mb-2">Chofer de lujo</h5>
