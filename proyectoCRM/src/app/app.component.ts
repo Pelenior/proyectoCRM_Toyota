@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,41 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'proyectoCRM';
+
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  get isLoggedIn(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  irAPaginaPrincipal(): void {
+    const token = localStorage.getItem('token');
+
+    // 1. Not logged in? Go to Landing Page
+    if (!token) {
+      this.router.navigate(['/']);
+      return;
+    }
+
+    // 2. Logged in? Check Role
+    const role = this.authService.getRoleFromToken(token);
+
+    if (role === 'ADMIN') {
+      this.router.navigate(['/admin']);
+    } else if (role === 'CHOFER') {
+      this.router.navigate(['/chofer']);
+    } else if (role === 'CLIENTE') {
+      // You haven't created this yet, but the logic is ready
+      this.router.navigate(['/cliente']); 
+    } else {
+      // Fallback
+      this.router.navigate(['/']);
+    }
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
 }
