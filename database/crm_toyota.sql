@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2025 a las 12:12:27
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Nov 28, 2025 at 08:45 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `crm_toyota`
+-- Database: `crm_toyota`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `administradores`
+-- Table structure for table `administradores`
 --
 
 DROP TABLE IF EXISTS `administradores`;
@@ -38,17 +38,17 @@ CREATE TABLE `administradores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `administradores`
+-- Dumping data for table `administradores`
 --
 
 INSERT INTO `administradores` (`id`, `nombre`, `email`, `telefono`, `password`, `rol`) VALUES
 (1, 'Laura Admin', 'ladmin@admin.toyota.com', 896547531, '$2a$10$UVFlG.fdutBQ6iOaz/KjQOk1RJD37aVriCT6Fy.Q0qIS5DA6RGbWq', 'ADMIN'),
-(2, 'Eladio Admin', 'eladmin@admin.toyota.com', 159753486, '$2a$10$JgV6BcuL7HLosbWTaqZBAuhtvCVyoPMUj1uwSQU62WRAwqa3eAvqS', 'ADMIN');
+(2, 'Eladio Admin', 'eladmin@admin.toyota.com', 159753486, '$2a$10$XALeErXdo/OEx0eFBkXxF.7oirf/g8D6GVoUBLg5tWxXG8ujke2xa', 'ADMIN');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `choferes`
+-- Table structure for table `choferes`
 --
 
 DROP TABLE IF EXISTS `choferes`;
@@ -62,17 +62,17 @@ CREATE TABLE `choferes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `choferes`
+-- Dumping data for table `choferes`
 --
 
 INSERT INTO `choferes` (`id`, `nombre`, `email`, `telefono`, `password`, `rol`) VALUES
-(1, 'Elcho Ferr', 'elchoferr@toyota.com', 787845457, '$2a$10$D8S.1.a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3', 'CHOFER'),
-(2, 'Lakon Duc Tora', 'ldtora@toyota.com', 123654789, '$2a$10$D8S.1.a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3', 'CHOFER');
+(1, 'Elcho Ferr', 'elchoferr@toyota.com', 787845457, '$2a$10$nac1q7I8lO.WmWtxcaMmU.BPzn1GtFe/cjSWY/7GnEJBnF7Jvbj8O', 'CHOFER'),
+(2, 'Lakon Duk Tora', 'ldtora@toyota.com', 123654789, '$2a$10$uyTQAUknAnBmH40YYV01veWB2spXikkg..YKn6oKNVJGSWiEfTy2S', 'CHOFER');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `clientes`
+-- Table structure for table `clientes`
 --
 
 DROP TABLE IF EXISTS `clientes`;
@@ -87,64 +87,64 @@ CREATE TABLE `clientes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `clientes`
+-- Dumping data for table `clientes`
 --
 
 INSERT INTO `clientes` (`id`, `nombre`, `email`, `telefono`, `id_chofer`, `password`, `rol`) VALUES
-(1, 'Toyota España', 'contacto@toyota.es', 900324578, 1, '$2a$10$D8S.1.a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3', 'CLIENTE'),
-(2, 'Cliente Particular', 'cliente@example.com', 600123456, 2, '$2a$10$D8S.1.a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3', 'CLIENTE');
+(1, 'Toyota España', 'contacto@toyota.es', 900324578, 1, '$2a$10$8ls4dvKdjoWUJ2e5b00ls.l5u.6WkZ/x509ugRPsptYMsHk0dyaKu', 'CLIENTE'),
+(2, 'Cliente Particular', 'cliente@example.com', 600123456, 2, '$2a$10$GL9fFtam149DIcoHNWAziOwFvRtJqDTNpiZ15Iivzd/Ilnj0Xl49C', 'CLIENTE');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `administradores`
+-- Indexes for table `administradores`
 --
 ALTER TABLE `administradores`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `choferes`
+-- Indexes for table `choferes`
 --
 ALTER TABLE `choferes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `clientes`
+-- Indexes for table `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_chofer` (`id_chofer`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `administradores`
+-- AUTO_INCREMENT for table `administradores`
 --
 ALTER TABLE `administradores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de la tabla `choferes`
+-- AUTO_INCREMENT for table `choferes`
 --
 ALTER TABLE `choferes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `clientes`
+-- AUTO_INCREMENT for table `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `clientes`
+-- Constraints for table `clientes`
 --
 ALTER TABLE `clientes`
   ADD CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`id_chofer`) REFERENCES `choferes` (`id`) ON DELETE SET NULL;
