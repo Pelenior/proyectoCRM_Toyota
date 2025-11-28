@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { AdminComponent } from './admin/admin.component';
 import { ChoferComponent } from './chofer/chofer.component';
 import { roleGuard } from './guards/role.guard';
+import { TarifasComponent } from './tarifas/tarifas.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},
@@ -35,5 +36,6 @@ export const routes: Routes = [
     { path: 'contacto', component: ContactoComponent},
     { path: 'aviso-legal', component: AvisoLegalComponent},
     { path: 'privacidad', component: PrivacidadComponent},
-    { path: 'cookies', component: CookiesComponent}
+    { path: 'cookies', component: CookiesComponent},
+    { path: 'tarifas', component: TarifasComponent}
 ];

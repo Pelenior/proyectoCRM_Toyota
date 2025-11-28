@@ -1,17 +1,26 @@
 <body class="font-sans bg-gray-50 text-gray-800">
   <article>
     <!-- Cookie Banner -->
-    <div id="cookieBanner" class="fixed bottom-0 left-0 w-full bg-gray-900 text-gray-100 shadow-lg">
-      <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between">
-        <p class="text-sm md:text-base mb-4 md:mb-0">
-          Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias. Puede aceptar todas las cookies o configurar sus preferencias.
-        </p>
-        <div class="flex gap-4">
-          <button id="cookieSettings" class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-800 transition">Configurar</button>
-          <button id="cookieAccept" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">Aceptar todas</button>
-        </div>
-      </div>
+    <!-- cookie-banner.component.html -->
+<div *ngIf="showBanner" id="cookieBanner" 
+     class="fixed bottom-0 left-0 w-full bg-gray-900 text-gray-100 shadow-lg">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between">
+    <p class="text-sm md:text-base mb-4 md:mb-0">
+      Utilizamos cookies propias y de terceros para mejorar nuestros servicios...
+    </p>
+    <div class="flex gap-4">
+      <button (click)="configurar()" 
+              class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-800 transition">
+        Configurar
+      </button>
+      <button (click)="aceptarTodas()" 
+              class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">
+        Aceptar todas
+      </button>
     </div>
+  </div>
+</div>
+
 
     <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 py-10">
