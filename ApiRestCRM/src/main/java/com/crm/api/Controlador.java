@@ -28,8 +28,8 @@ public class Controlador {
         String email = authentication.getName();
         
         // Helpers para saber el rol
-        boolean isAdmin = authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-        boolean isChofer = authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_CHOFER"));
+        boolean isAdmin = authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ADMIN"));
+        boolean isChofer = authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("CHOFER"));
 
         if (isAdmin) {
             return clienteRepositorio.findAll();

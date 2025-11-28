@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 25, 2025 at 07:14 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 28-11-2025 a las 12:12:27
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,140 +18,137 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `crm_toyota`
+-- Base de datos: `crm_toyota`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `administradores`
+-- Estructura de tabla para la tabla `administradores`
 --
 
 DROP TABLE IF EXISTS `administradores`;
 CREATE TABLE `administradores` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL DEFAULT '',
-  `email` varchar(40) NOT NULL,
-  `telefono` int(9) NOT NULL
+  `nombre` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `telefono` int(9) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `rol` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `administradores`
+-- Volcado de datos para la tabla `administradores`
 --
 
-INSERT INTO `administradores` (`id`, `nombre`, `email`, `telefono`) VALUES
-(1, 'Laura Admin', 'ladmin@admin.toyota.com', 896547531),
-(2, 'Eladio Admin', 'eladmin@admin.toyota.com', 159753486);
+INSERT INTO `administradores` (`id`, `nombre`, `email`, `telefono`, `password`, `rol`) VALUES
+(1, 'Laura Admin', 'ladmin@admin.toyota.com', 896547531, '$2a$10$UVFlG.fdutBQ6iOaz/KjQOk1RJD37aVriCT6Fy.Q0qIS5DA6RGbWq', 'ADMIN'),
+(2, 'Eladio Admin', 'eladmin@admin.toyota.com', 159753486, '$2a$10$JgV6BcuL7HLosbWTaqZBAuhtvCVyoPMUj1uwSQU62WRAwqa3eAvqS', 'ADMIN');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `choferes`
+-- Estructura de tabla para la tabla `choferes`
 --
 
 DROP TABLE IF EXISTS `choferes`;
 CREATE TABLE `choferes` (
   `id` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(20) NOT NULL DEFAULT '',
-  `email` varchar(40) NOT NULL,
-  `telefono` int(9) NOT NULL
+  `nombre` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `telefono` int(9) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `rol` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `choferes`
+-- Volcado de datos para la tabla `choferes`
 --
 
-INSERT INTO `choferes` (`id`, `nombre`, `email`, `telefono`) VALUES
-(1, 'Elcho Ferr', 'elchoferr@toyota.com', 787845457),
-(2, 'Lakon Duc Tora', 'ldtora@toyota.com', 123654789);
+INSERT INTO `choferes` (`id`, `nombre`, `email`, `telefono`, `password`, `rol`) VALUES
+(1, 'Elcho Ferr', 'elchoferr@toyota.com', 787845457, '$2a$10$D8S.1.a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3', 'CHOFER'),
+(2, 'Lakon Duc Tora', 'ldtora@toyota.com', 123654789, '$2a$10$D8S.1.a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3', 'CHOFER');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `clientes`
+-- Estructura de tabla para la tabla `clientes`
 --
 
 DROP TABLE IF EXISTS `clientes`;
 CREATE TABLE `clientes` (
   `id` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(20) NOT NULL DEFAULT '',
-  `email` varchar(40) NOT NULL,
+  `nombre` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `telefono` int(9) NOT NULL,
-  `id_chofer` int(5) UNSIGNED DEFAULT NULL
+  `id_chofer` int(5) UNSIGNED DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `rol` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `clientes`
+-- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `nombre`, `email`, `telefono`, `id_chofer`) VALUES
-(1, 'Toyota España', 'contacto@toyota.es', 900324578, 1),
-(2, 'Cliente Particular', 'cliente@example.com', 600123456, 2);
+INSERT INTO `clientes` (`id`, `nombre`, `email`, `telefono`, `id_chofer`, `password`, `rol`) VALUES
+(1, 'Toyota España', 'contacto@toyota.es', 900324578, 1, '$2a$10$D8S.1.a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3', 'CLIENTE'),
+(2, 'Cliente Particular', 'cliente@example.com', 600123456, 2, '$2a$10$D8S.1.a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3', 'CLIENTE');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `administradores`
+-- Indices de la tabla `administradores`
 --
 ALTER TABLE `administradores`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `choferes`
+-- Indices de la tabla `choferes`
 --
 ALTER TABLE `choferes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `clientes`
+-- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_chofer` (`id_chofer`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `administradores`
+-- AUTO_INCREMENT de la tabla `administradores`
 --
 ALTER TABLE `administradores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `choferes`
+-- AUTO_INCREMENT de la tabla `choferes`
 --
 ALTER TABLE `choferes`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `clientes`
+-- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `clientes`
+-- Filtros para la tabla `clientes`
 --
 ALTER TABLE `clientes`
   ADD CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`id_chofer`) REFERENCES `choferes` (`id`) ON DELETE SET NULL;
 COMMIT;
-
-ALTER TABLE administradores ADD COLUMN password VARCHAR(255) NOT NULL, ADD COLUMN rol VARCHAR(20) DEFAULT 'ADMIN';
-ALTER TABLE choferes ADD COLUMN password VARCHAR(255) NOT NULL, ADD COLUMN rol VARCHAR(20) DEFAULT 'CHOFER';
-ALTER TABLE clientes ADD COLUMN password VARCHAR(255) NOT NULL, ADD COLUMN rol VARCHAR(20) DEFAULT 'CLIENTE';
-
--- Actualiza los usuarios con una contraseña temporal (ej: "12345" encriptada con BCrypt)
-UPDATE administradores SET password = '$2a$10$D8S.1.a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3';
-UPDATE choferes SET password = '$2a$10$D8S.1.a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3';
-UPDATE clientes SET password = '$2a$10$D8S.1.a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3';
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
