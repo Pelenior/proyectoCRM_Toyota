@@ -13,10 +13,12 @@ import { AdminComponent } from './admin/admin.component';
 import { ChoferComponent } from './chofer/chofer.component';
 import { roleGuard } from './guards/role.guard';
 import { TarifasComponent } from './tarifas/tarifas.component';
+import { SignupComponent } from './signup/signup.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent},
     { path: 'login', component:LoginComponent},
+    { path: 'signup', component:SignupComponent},
     {
         path: 'admin',
         component:AdminComponent,

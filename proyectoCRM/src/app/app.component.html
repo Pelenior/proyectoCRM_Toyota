@@ -58,7 +58,7 @@
         <div class="space-x-4 pb-2">
           @if (!isLoggedIn) {
               <button routerLink="/login" class="px-4 py-2 border rounded hover:bg-gray-100">Iniciar sesión</button>
-              <button routerLink="/form" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Crear una cuenta</button>
+              <button routerLink="/signup" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Crear una cuenta</button>
             }
           @else {
             <button (click)="logout()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Cerrar sesión</button>
