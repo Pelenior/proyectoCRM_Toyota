@@ -23,7 +23,7 @@
 
         <!-- Icons + CTA -->
         <div class="flex items-center space-x-8">
-          <button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">Reserva ahora</button>
+          <a href="#"><button class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">Reserva ahora</button></a>
           <div class="flex space-x-6 text-sm">
             <div>
               <p class="flex items-center gap-2 font-semibold text-gray-700">
@@ -44,12 +44,11 @@
       <!-- Navigation -->
       <nav class="flex justify-between items-center border-t pt-3">
         <ul class="flex space-x-6 font-medium text-gray-700">
-          <li class="hover:text-red-600">Chófer de lujo</li>
+          <a routerLink="/"> <li class="hover:text-red-600">Chófer de lujo</li></a>
           <a routerLink="/servicios"><li class="hover:text-red-600">Servicios</li></a>
-          
-          <li class="hover:text-red-600">Flota</li>
+          <a routerLink="/flota"><li class="hover:text-red-600">Flota</li></a>
           <li class="hover:text-red-600">Precios</li>
-          <li class="hover:text-red-600">Contacto</li>
+          <a href="#"><li class="hover:text-red-600">Contacto</li></a>
         </ul>
         <div class="space-x-4">
           <button routerLink="/" class="px-4 py-2 border rounded hover:bg-gray-100">Iniciar sesión</button>
