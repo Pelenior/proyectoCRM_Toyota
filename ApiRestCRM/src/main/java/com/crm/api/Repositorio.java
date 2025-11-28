@@ -1,8 +1,10 @@
 package com.crm.api;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+import java.util.List;
 
-//Hereda las funcionalidades CRUD básicas: findAll, findById, save, delete
 public interface Repositorio extends JpaRepository<Cliente, Integer> {
- // El primer parámetro es la Entidad (Cliente) y el segundo es el tipo de la clave primaria (Integer)
+    Optional<Cliente> findByEmail(String email);
+    List<Cliente> findByIdChofer(Integer idChofer);
 }
