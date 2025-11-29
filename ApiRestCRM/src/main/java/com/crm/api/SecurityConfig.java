@@ -85,7 +85,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         
         // 1. Allow your frontend origin
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedOrigins(List.of("http://localhost:4200", "https://crm-toyota.web.app/"));
         
         // 2. Allow ALL methods (GET, POST, PUT, DELETE, OPTIONS, etc.)
         configuration.setAllowedMethods(List.of("*"));
