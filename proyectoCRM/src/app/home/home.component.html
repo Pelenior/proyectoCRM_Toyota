@@ -1,64 +1,83 @@
 <body class="font-sans bg-gray-50 text-gray-800">
   <article class="max-w-7xl mx-auto px-4 py-10">
     <main>
+      <!-- Título principal -->
       <h1 class="text-3xl font-bold text-gray-900 mb-6">Alquiler de Toyota con chófer</h1>
-      <section class="bg-gray-800 text-white shadow-lg rounded-lg p-8 mb-10 text-center transform transition hover:scale-[1.01]">
-        
-        @if (hasDriver()) {
-            <h2 class="text-2xl md:text-3xl font-bold mb-4">Tu servicio está activo</h2>
-            <p class="text-gray-300 mb-8 max-w-2xl mx-auto text-lg">
-                Ya tienes un conductor asignado. Accede a tu panel para ver los datos de contacto o gestionar tu viaje.
-            </p>
-            
-            <button (click)="startHiring()" 
-                class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-md text-lg transition duration-300 ease-in-out border-2 border-green-600 hover:border-green-500">
-                Comprueba tu Chofer &rarr;
-            </button>
 
+      <!-- Sección condicional -->
+      <section class="bg-gray-800 text-white shadow-lg rounded-lg p-8 mb-10 text-center transform transition hover:scale-[1.01]">
+        @if (hasDriver()) {
+          <h2 class="text-2xl md:text-3xl font-bold mb-4">Tu servicio está activo</h2>
+          <p class="text-gray-300 mb-8 max-w-2xl mx-auto text-lg">
+            Ya tienes un conductor asignado. Accede a tu panel para ver los datos de contacto o gestionar tu viaje.
+          </p>
+          <button (click)="startHiring()" 
+            class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-md text-lg transition duration-300 ease-in-out border-2 border-green-600 hover:border-green-500">
+            Comprueba tu Chofer &rarr;
+          </button>
         } @else {
-            <h2 class="text-2xl md:text-3xl font-bold mb-4">¿Necesitas un chofer ahora mismo?</h2>
-            <p class="text-gray-300 mb-8 max-w-2xl mx-auto text-lg">
-                No pierdas tiempo buscando. Únete a nuestra plataforma y asignaremos automáticamente al mejor conductor disponible para ti en segundos.
-            </p>
-            
-            <button (click)="startHiring()" 
-                class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full shadow-md text-lg transition duration-300 ease-in-out">
-                ¡Empezar a Contratar!
-            </button>
+          <h2 class="text-2xl md:text-3xl font-bold mb-4">¿Necesitas un chofer ahora mismo?</h2>
+          <p class="text-gray-300 mb-8 max-w-2xl mx-auto text-lg">
+            No pierdas tiempo buscando. Únete a nuestra plataforma y asignaremos automáticamente al mejor conductor disponible para ti en segundos.
+          </p>
+          <button (click)="startHiring()" 
+            class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full shadow-md text-lg transition duration-300 ease-in-out">
+            ¡Empezar a Contratar!
+          </button>
         }
       </section>
+
+      <!-- Sección de tarifas -->
       <section class="bg-white shadow rounded p-6 mb-10">
-        <a routerLink="/tarifas" class="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Tarifas 2025</a>
-        <h3 class="text-xl font-semibold text-red-600 mb-2">Traslados de alta gama.</h3>
-        <p class="text-gray-700 mb-4">
+        <div class="wpb_wrapper text-center mb-6">
+          <!-- Antes tenía style="text-align:center;" -->
+          <h1 class="text-2xl font-bold text-gray-900 mb-4">Alquiler de coches con chofer</h1>
+          <a routerLink="/tarifas" class="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
+            Tarifas 2025
+          </a>
+        </div>
+
+        <h3 class="text-xl font-semibold text-red-600 mb-4">Traslados de alta gama.</h3>
+        <p class="text-gray-700 mb-6 leading-relaxed">
           Alquiler de vehículos Toyota con chófer para traslados.
           Toyota Exclusive Drive es uno de los servicios de chófer privado mejor valorados.
           Ofrecemos siempre la mejor relación calidad-precio-satisfacción del mercado.<br>
           Puntualidad y rapidez, confort, comodidad y discreción.
         </p>
-        <a routerLink="/contacto" class="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Solicita presupuesto</a>
+        <a routerLink="/contacto" class="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
+          Solicita presupuesto
+        </a>
       </section>
+
+      <!-- Sección de novedades -->
       <section class="bg-white shadow rounded p-6">
-        <h3 class="text-xl font-semibold text-red-600 mb-4">Novedades servicio de alquiler de Toyota Exclusive Drive 2025</h3>
-        <img src="img/cochesToyota.png" alt="cochesToyota" class="w-full rounded mb-6">
-        <h4 class="text-lg font-semibold text-gray-800">CHÓFERES PROFESIONALES:</h4>
-        <p class="text-gray-700 mb-4">Todos nuestros conductores son <strong>profesionales con experiencia cualificados en servicios de alto standing</strong>, hablan idiomas, visten impecablemente y su trato es discreto, cercano y servicial.</p>
-        <h4 class="text-lg font-semibold text-gray-800">DISPONIBILIDAD 24/7:</h4>
-        <p class="text-gray-700"><strong>Nuestra disponibilidad es de 24 horas al día</strong>, 7 días a la semana. Podemos dar servicio nocturno o de madrugada si así se requiere y contestamos en menos de 1 hora.</p>
+        <h3 class="text-xl font-semibold text-red-600 mb-6">Novedades servicio de alquiler de Toyota Exclusive Drive 2025</h3>
+        <img src="img/cochesToyota.png" alt="cochesToyota" class="w-full rounded mb-6 shadow-md">
+        
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">CHÓFERES PROFESIONALES:</h4>
+        <p class="text-gray-700 mb-6 leading-relaxed">
+          Todos nuestros conductores son <strong>profesionales con experiencia cualificados en servicios de alto standing</strong>, hablan idiomas, visten impecablemente y su trato es discreto, cercano y servicial.
+        </p>
+
+        <h4 class="text-lg font-semibold text-gray-800 mb-2">DISPONIBILIDAD 24/7:</h4>
+        <p class="text-gray-700 leading-relaxed">
+          <strong>Nuestra disponibilidad es de 24 horas al día</strong>, 7 días a la semana. Podemos dar servicio nocturno o de madrugada si así se requiere y contestamos en menos de 1 hora.
+        </p>
       </section>
     </main>
   </article>
 
+  <!-- Footer -->
   <footer class="bg-gray-900 text-gray-300 py-8 mt-10">
     <div class="max-w-7xl mx-auto px-4">
       <h5 class="text-lg font-semibold text-white mb-2">Chofer de lujo</h5>
       <p class="mb-2">Alquiler de coches Toyota de lujo con chófer.</p>
       <p class="italic mb-4">¡We serve in English already! Call us.</p>
       <div class="flex flex-wrap gap-6 text-sm">
-        <a routerLink="/privacidad" class="hover:text-white">Privacidad</a>
-        <a routerLink="/cookies" class="hover:text-white">Cookies</a>
-        <a routerLink="/aviso-legal" class="hover:text-white">Legal</a>
-        <a routerLink="/aviso-legal" class="hover:text-white">Copyright © - Aviso legal y privacidad</a>
+        <a routerLink="/privacidad" class="hover:text-white transition">Privacidad</a>
+        <a routerLink="/cookies" class="hover:text-white transition">Cookies</a>
+        <a routerLink="/aviso-legal" class="hover:text-white transition">Legal</a>
+        <a routerLink="/aviso-legal" class="hover:text-white transition">Copyright © - Aviso legal y privacidad</a>
       </div>
     </div>
   </footer>
