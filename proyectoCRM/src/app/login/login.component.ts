@@ -38,8 +38,7 @@ export class LoginComponent {
 
     this.authService.login(credentials).subscribe({
       next: (response) => {
-        // 1. IMPORTANT: Save the token! 
-        // If you don't do this, the /form page won't have the "Key" to get data.
+        // 1. Save the token for later, if we don't do this, the /form page won't have the "Key" to get data.
         localStorage.setItem('token', response.token);
 
         // 2. Decode the role
@@ -60,7 +59,6 @@ export class LoginComponent {
             this.router.navigate(['/']);
         }
         else {
-            // If credentials are correct but user is NOT an admin (e.g., a Client)
             this.errorMessage.set('Acceso denegado. No tienes permisos de Administrador.');
             this.isLoading.set(false);
         }

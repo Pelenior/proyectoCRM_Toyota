@@ -7,7 +7,7 @@ import { ServicioAPIService, Clientes } from '../servicio-api.service';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink], // Added RouterLink for "Back to Login"
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })

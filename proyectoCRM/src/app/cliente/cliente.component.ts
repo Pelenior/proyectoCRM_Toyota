@@ -25,7 +25,7 @@ export class ClienteComponent {
   }
 
   loadMyData(): void {
-    // 1. Get all clients (The backend filters to return ONLY me because I am a CLIENTE role)
+    // 1. Get all clients
     this.apiService.getClientes().subscribe({
       next: (data) => {
         if (data && data.length > 0) {
@@ -45,7 +45,7 @@ export class ClienteComponent {
   }
 
   loadMyChofer(choferId: number): void {
-    // We fetch all chofers and find ours (simple solution)
+    // We fetch all chofers and find ours
     this.apiService.getChoferes().subscribe(chofers => {
       const found = chofers.find(c => c.id === choferId);
       this.myChofer.set(found || null);
@@ -55,7 +55,7 @@ export class ClienteComponent {
 
   contratarService(): void {
     this.isLoading.set(true);
-    // Call the "Smart Assign" logic
+    // Call the smart assign logic
     this.apiService.assignChoferAutomatico().subscribe({
       next: (updatedClient) => {
         this.me.set(updatedClient);

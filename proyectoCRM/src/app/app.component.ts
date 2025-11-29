@@ -22,7 +22,7 @@ export class AppComponent {
   irAPaginaPrincipal(): void {
     const token = localStorage.getItem('token');
 
-    // 1. Not logged in? Go to Landing Page
+    // 1. If not logged in, go to Landing Page
     if (!token) {
       this.router.navigate(['/']);
       return;
@@ -36,10 +36,8 @@ export class AppComponent {
     } else if (role === 'CHOFER') {
       this.router.navigate(['/chofer']);
     } else if (role === 'CLIENTE') {
-      // You haven't created this yet, but the logic is ready
       this.router.navigate(['/cliente']); 
     } else {
-      // Fallback
       this.router.navigate(['/']);
     }
   }
