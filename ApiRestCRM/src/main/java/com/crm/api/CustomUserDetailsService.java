@@ -19,7 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         
-        // 1. Buscar en Administradores (Eficiente)
+        // 1. Buscar en Administradores
         var admin = adminRepo.findByEmail(email).orElse(null);
         if (admin != null) {
              return new User(admin.getEmail(), admin.getPassword(), Collections.singletonList(new SimpleGrantedAuthority(admin.getRol())));

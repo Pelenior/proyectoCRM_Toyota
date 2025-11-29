@@ -21,7 +21,7 @@ public class Chofer {
 
     public Chofer() {}
 
-    // --- GETTERS Y SETTERS COMPLETOS ---
+    // Getters y setters
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 

@@ -22,7 +22,7 @@ public class Cliente {
  private Integer telefono; 
  
  @Column(name = "id_chofer")
- // FIX: Map the JSON "id_chofer" to this Java variable
+ // Map the JSON "id_chofer" to this Java variable
  @JsonProperty("id_chofer") 
  private Integer idChofer;
 

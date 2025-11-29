@@ -36,7 +36,7 @@ public class SecurityConfig {
 	        .csrf(csrf -> csrf.disable())
 	        .cors(Customizer.withDefaults())
 	        .authorizeHttpRequests(auth -> auth
-	            // FIX: Allow the "Handshake" (OPTIONS) requests globally
+	            // Allow the options requests globally
 	            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 	            
 	            .requestMatchers("/api/auth/**").permitAll()
@@ -55,17 +55,16 @@ public class SecurityConfig {
             UserDetailsService userDetailsService,
             PasswordEncoder passwordEncoder) {
         
-        // 1. Usamos el constructor que solo pide UserDetailsService (según tu código fuente)
+        // 1. Usamos el constructor que solo pide userDetailsService
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
         
-        // 2. Usamos el SETTER para pasar el PasswordEncoder
+        // 2. Usamos el setter para pasar el PasswordEncoder
         authProvider.setPasswordEncoder(passwordEncoder);
         
         return authProvider;
     }
 
     // Definimos el filtro como un Bean aquí para tener control total
-    // IMPORTANTE: Asegúrate de quitar @Component de la clase JwtAuthenticationFilter
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter(JwtService jwtService, UserDetailsService userDetailsService) {
         return new JwtAuthenticationFilter(jwtService, userDetailsService);
@@ -91,10 +90,10 @@ public class SecurityConfig {
         // 2. Allow ALL methods (GET, POST, PUT, DELETE, OPTIONS, etc.)
         configuration.setAllowedMethods(List.of("*"));
         
-        // 3. Allow ALL headers (This fixes the 403 on POST)
+        // 3. Allow ALL headers
         configuration.setAllowedHeaders(List.of("*"));
         
-        // 4. Allow credentials (optional, but good for stability)
+        // 4. Allow credentials
         configuration.setAllowCredentials(true);
         
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

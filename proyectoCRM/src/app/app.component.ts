@@ -28,7 +28,7 @@ export class AppComponent {
       return;
     }
 
-    // 2. Logged in? Check Role
+    // 2. If not, check Role
     const role = this.authService.getRoleFromToken(token);
 
     if (role === 'ADMIN') {

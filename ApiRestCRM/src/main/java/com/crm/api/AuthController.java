@@ -75,7 +75,7 @@ public class AuthController {
     }
 }
 
-// Clases auxiliares (puedes ponerlas en archivos separados si prefieres)
+// Clases auxiliares
 class LoginRequest {
     private String email;
     private String password;

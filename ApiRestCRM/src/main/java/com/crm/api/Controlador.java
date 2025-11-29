@@ -10,15 +10,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/clientes")
-// CORS debe configurarse globalmente en SecurityConfig, pero mantenemos esto por si acaso
-//@CrossOrigin(origins = "http://localhost:4200") 
 public class Controlador {
 
     @Autowired 
     private Repositorio clienteRepositorio;
     
     @Autowired 
-    private ChoferRepositorio choferRepo; // Ahora funcionará porque creamos la interfaz
+    private ChoferRepositorio choferRepo;
     
     @Autowired 
     private PasswordEncoder passwordEncoder;
@@ -85,23 +83,22 @@ public class Controlador {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
 
-        // 1.5 NEW: STOP if they already have a driver
+        // 2: Stop if they already have a driver
         if (currentClient.getIdChofer() != null) {
-            // Already has a driver? Return immediately without changing anything
+            // If it already has a driver, return immediately without changing anything
             return currentClient; 
-            // OR: throw new RuntimeException("Ya tienes un chofer asignado");
         }
 
-        // 2. Get all drivers
+        // 3. Get all drivers
         List<Chofer> allChoferes = choferRepo.findAll();
         if (allChoferes.isEmpty()) {
             throw new RuntimeException("No hay choferes disponibles");
         }
 
-        // 3. Get all clients (to count assignments)
+        // 4. Get all clients
         List<Cliente> allClientes = clienteRepositorio.findAll();
 
-        // 4. Algorithm: Find the chofer with the MINIMUM count of clients
+        // 5. Find the chofer with the minimum count of clients
         Chofer bestChofer = null;
         int minClients = Integer.MAX_VALUE;
 

@@ -21,7 +21,7 @@ public class Administrador {
     // Constructor vacío requerido por JPA
     public Administrador() {}
 
-    // --- GETTERS Y SETTERS COMPLETOS ---
+    // Getters y setters
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
