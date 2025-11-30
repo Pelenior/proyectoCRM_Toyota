@@ -28,9 +28,13 @@ export interface Chofer {
 export class ServicioAPIService {
 
   // URL de la API que se ejecuta en localhost:8080 y la ruta base es /api/clientes
-  private apiClientesUrl = 'http://localhost:8080/api/clientes';
+  // private apiClientesUrl = 'http://localhost:8080/api/clientes';
 
-  private apiChoferesUrl = 'http://localhost:8080/api/choferes';
+  // private apiChoferesUrl = 'http://localhost:8080/api/choferes';
+
+  private apiClientesUrl = 'https://proyectocrm-toyota.onrender.com/api/clientes';
+  
+  private apiChoferesUrl = 'https://proyectocrm-toyota.onrender.com/api/choferes';
 
   constructor(private http: HttpClient) { }
 
